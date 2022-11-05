@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  MainFunction:
+    FunctionName: discord-notification
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: discord_notification/
+      Handler: handler.handler
+      Runtime: python3.9
+      Architectures: [arm64]
+      Environment:
+        Variables:
+          WEBHOOK_URL: "" # REPLACE ME
+
+    # TODO: didn't work here. Needs to be setup by hand for now
+    # Events:
+    #   Trigger:
+    #     Type: CloudWatchLogs 
+    #     Properties:
+    #       LogGroupName: "/aws/lambda/your-log-group"
+    #       FilterPattern: Traceback   # see https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
